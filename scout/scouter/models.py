@@ -1,6 +1,10 @@
 from django.db import models
 
 
+class Robot(models.Model):
+    team_number = models.IntegerField(default=0)
+
+
 class Survey(models.Model):
     auto_choices = (
         ('None', 'None'),
@@ -13,6 +17,8 @@ class Survey(models.Model):
     #
     # team number - number
     team_number = models.IntegerField(default=0)
+
+    robot = models.ForeignKey(Robot, on_delete=models.CASCADE, null=True)
 
     match_number = models.CharField(max_length=200)
 

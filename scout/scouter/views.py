@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import SurveyForm
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Survey
 
 
@@ -11,9 +12,11 @@ def index(request):
 
 
 def birds_eye_view(request):
-    return HttpResponse("birds eye view")
+    my_surveys = Survey.objects.all()
+    return render(request, 'scouter/birdseyeview.html', {'my_surveys': my_surveys})
 
 
+@csrf_exempt
 def get_survey(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -23,6 +26,7 @@ def get_survey(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 

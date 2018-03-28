@@ -5,11 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" action=".">
-    {{form.as_p}}
-    <input type="submit" value="Submit">
-
-
-</form>
+{% for survey in my_surveys %}
+<h2>
+    {{survey}}
+</h2>
+{% endfor %}
 </body>
 </html>
