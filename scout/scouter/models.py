@@ -18,10 +18,10 @@ class Survey(models.Model):
 
     # Auton - selectable list(None, Baseline, Center switch, side switch, scale)
     auton = models.CharField(
-            max_length=30,
-            choices=auto_choices,
-            default='None',
-        )
+        max_length=30,
+        choices=auto_choices,
+        default='None',
+    )
 
     # auto cubes - number
     auto_cubes = models.IntegerField(default=0)
@@ -69,5 +69,25 @@ class Survey(models.Model):
     scouter_name = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-        return str(self.team_number) + " - " + str(self.match_number)
+        return str(self.team_number) + " - match " + str(self.match_number)
 
+    @classmethod
+    def stringToObject(cls, string):
+        string = '[{"name":"team_number","value":"333"},' \
+                 + '{"name":"match_number","value":"010"}]' \
+                 + '{"name":"auton","value":"?????????????????????????????????????????????"}]' \
+                 + '{"name":"auton_cubes","value":"455"}]' \
+                 + '{"name":"auton_notes","value":"auto notes"}]' \
+                 + '{"name":"own_switch_cubes","value":"455"}]' \
+                 + '{"name":"other_switch_cubes","value":"455"}]' \
+                 + '{"name":"scale_cubes","value":"455"}]' \
+                 + '{"name":"vault_cubes","value":"455"}]' \
+                 + '{"name":"tele_notes","value":"teleoperated notes"}]' \
+                 + '{"name":"can_climb","value":"False"}]' \
+                 + '{"name":"buddy_climb","value":"False"}]' \
+                 + '{"name":"robot_speed","value":"455"}]' \
+                 + '{"name":"robot_cube_intake","value":"455"}]' \
+                 + '{"name":"robot_cube_holding","value":"455"}]' \
+                 + '{"name":"robot_cube_placing","value":"455"}]' \
+                 + '{"name":"other_notes","value":"other notes"}]' \
+                 + '{"name":"scouter_name","value":"scouter"}]'
